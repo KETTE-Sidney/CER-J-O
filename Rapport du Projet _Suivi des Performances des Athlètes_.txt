@@ -1,0 +1,152 @@
+﻿Rapport du Projet "CER-J-O"
+
+
+Introduction
+
+
+Le projet "CER-J-O" est un programme en langage C destiné à gérer et suivre les performances sportives des athlètes. Cette application permet d'ajouter des performances, de les visualiser par événement ou par date, et de calculer diverses statistiques. Le développement de ce projet a été réalisé en trio dans le cadre du projet de fin de 1ère année d’ingénieur.
+
+
+Description du Sujet
+
+
+Notre projet se présente comme une sorte d’application capable de :
+
+
+1. Gérer les données de performances sportives des athlètes.
+2. Ajouter, afficher et sauvegarder les performances.
+3. Calculer des statistiques comme les meilleures, pires et temps moyens pour chaque événement.
+4. Comparer les performances sur différentes dates.
+
+
+
+
+__ Organisation de l'Équipe et Flux de Travail __
+
+
+Pour la réalisation de notre projet notre équipe s'est organisée, dans un premier temps, de manière à répartir les tâches selon les compétences et les intérêts de chacun : 
+
+
+* Conception et définition des structures. (réalisé par CAVAIGNAC Romain)
+* Gestion des performances. (réalisé par BAGAYOKO Oumar et CAVAIGNAC Romain)
+* Gestion des événements. (réalisé par BAGAYOKO Oumar)
+*  Calcul des statistiques. (réalisé par KETTE Sidney)
+*  Développement de l'interface utilisateur.(réalisé par KETTE Sidney)
+
+
+Chaque membre de l'équipe s’est occupé de parties différentes avant une mise en commun, tout en communiquant avec les autres pour essayer d’assurer l'intégration cohérente des différentes parties du projet.
+
+
+__ Outils et Méthodologie __
+
+
+Pour cela, nous avons développé ce projet sur Replit pour faciliter la collaboration et nous permettre d’avoir un suivi direct sur de potentielles modifications. Des réunions et des sessions de code régulières (sur Discord) ont été organisées tout au long du mois de mai pour faire le point sur l'avancement du projet, discuter des problèmes rencontrés et trouver des solutions ensemble.
+
+
+
+
+
+
+__ Problèmes Rencontrés et Solutions Apportées __ 
+
+
+Au cours du développement de ce projet nous avons dû faire face à certaines difficultés individuelles mais aussi lors de la mise en commun :
+
+
+
+
+### 1. Gestion de la Mémoire
+
+
+**Problème :** La gestion de la mémoire dynamique lors de l'ajout de nouvelles performances a posé des défis, entraînant des erreurs de segmentation. Puisque nous ne trouvions pas la source de l'erreur, nous avons fait usage de Chat gpt afin de trouver ce qui bloquait. 
+
+
+**Solution :** à l’aide de l’ia générative , Utilisation de `realloc` pour réallouer avec vérification des retours pour éviter les erreurs de segmentation. Une attention particulière a été portée à la gestion des pointeurs. 
+          realloc(athlete->performances, sizeof(Performance)*   
+               (athlete->performance_count + 1))
+
+
+
+
+### 2. Validation des Entrées
+
+
+**Problème :** L’utilisateur pouvait entrer n’importe quel types de données mais incohérentes avec des dates inexistantes ou alors des épreuves non répertorié 
+
+
+**Solution :** Implémentation de fonctions de validation pour les dates (format "YYYY-MM-DD") et les événements, avec des messages d'erreur clairs pour guider l'utilisateur en cas de saisie incorrecte.
+
+
+                int validate_date_format(const char *date)
+is_valid_event(const Event events[], int event_count, const 
+char *event_name) 
+
+
+
+
+### 3. Persistance des Données
+
+
+**Problème :** Pertes des données entrées empêchant d’assurer la persistance des données entre les exécutions du programme.
+
+
+**Solution :** Développement de fonctions de sauvegarde et de chargement des données, avec une gestion des erreurs pour éviter les pertes de données.  
+    void load_athlete_data(Athlete *athlete);
+    void save_athlete_data(Athlete *athlete);
+
+
+
+
+### 4. Gestion des différents fichiers
+
+
+**Problème :** Mauvaise récupération des fichiers pour réemploi dans d’autres fichiers dû à une mauvaise communication.
+
+
+**Solution :** Précision du chemin exact des fichiers respectifs pour assurer la bonne récupération et utilisation des fichiers. (réglé en classe avec l’aide du chargé de TD)
+
+
+
+
+### 5. Interface Utilisateur
+
+
+**Ajout :** Utilisation des codes ANSI pour les couleurs et développement d'un menu interactif pour un programme moins terne et une utilisation plus agréable. 
+
+
+
+
+## Résultats
+
+
+Ce projet a abouti à la création d'une application fonctionnelle répondant aux objectifs fixés. Les principales fonctionnalités mises en œuvre sont :
+- Ajout et affichage des performances.
+- Calcul des statistiques (meilleures, pires et moyennes performances).
+- Comparaison des performances entre deux dates.
+- Gestion persistante des données à travers des fichiers.
+- Interface utilisateur avec menu interactif et sorties colorées.
+
+
+
+
+__ Conclusion __
+
+
+
+
+Ce projet nous a permis de créer une application fonctionnelle répondant aux objectifs, incluant l'ajout et l'affichage des performances, le calcul des statistiques, la comparaison des performances entre deux dates, et la sauvegarde des données. Cette expérience a été enrichissante et a permis de mettre en pratique nos connaissances en programmation C et de développer des compétences en gestion de la mémoire et en manipulation de fichiers. La collaboration au sein de l'équipe et l'utilisation d'outils de gestion de version comme Replit ont été essentielles pour mener à bien ce projet. 
+
+
+
+
+Nous remercions notre chargé de TD pour ses conseils et son soutien lors des séances de TD.
+
+
+
+
+
+
+Fait par : CAVAIGNAC Romain, BAGAYOKO Oumar et KETTE Sidney
+
+
+Date : 25/05/2024
